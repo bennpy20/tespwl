@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    // override nama tabel defaultnya
+    protected $table = 'karyawan';
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -18,10 +20,18 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        // yg bisa diisi user
+        'nip',
         'name',
         'email',
         'password',
     ];
+
+    // override kolom primary key
+    protected $primaryKey = 'nip';
+
+    // kalo bukan tipe bilangan, dan tdk autoincrement, set jadi false
+    public $incrementing = false;
 
     /**
      * The attributes that should be hidden for serialization.
